@@ -213,7 +213,7 @@ xfrAnl <- function(fleOrg = "", fleTgt = "") {
     lstOrg <- zip::zip_list(fleOrg)$filename
     lst2Cp <- lstOrg[grepl("index.html|[0-9].*\\s[a-z].*?/", lstOrg)]
     lstCmb <- union(zip::zip_list(fleTgt)$filename, lst2Cp)
-    tmpDir <- normalizePath(tempdir())
+    tmpDir <- tempdir()
 
     # create a list of files to be copied, extract them from the input file and
     # append them to the output file
@@ -222,7 +222,7 @@ xfrAnl <- function(fleOrg = "", fleTgt = "") {
     zip::zip(fleTgt,   files = lstCmb, root  = tmpDir)
 
     # remove the files and directories from the list of files to be copied
-    unlink(setdiff(unique(dirname(file.path(tmpDir, lstCmb))), tmpDir), recursive = TRUE)
+    # unlink(setdiff(unique(dirname(file.path(tmpDir, lstCmb))), tmpDir), recursive = TRUE)
     unlink(file.path(tmpDir, lstCmb[basename(lstCmb) == lstCmb]))
 
     TRUE
