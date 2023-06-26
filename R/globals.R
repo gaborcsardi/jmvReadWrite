@@ -222,8 +222,13 @@ xfrAnl <- function(fleOrg = "", fleTgt = "") {
     zip::zip(fleTgt,   files = lstCmb, root  = tmpDir)
 
     # remove the files and directories from the list of files to be copied
-    # unlink(setdiff(unique(dirname(file.path(tmpDir, lstCmb))), tmpDir), recursive = TRUE)
+    unlink(setdiff(unique(dirname(file.path(tmpDir, lstCmb))), tmpDir), recursive = TRUE)
     unlink(file.path(tmpDir, lstCmb[basename(lstCmb) == lstCmb]))
 
     TRUE
+}
+
+unlink <- function(x, ...) {
+  print(x)
+  base::unlink(x, ...)
 }
